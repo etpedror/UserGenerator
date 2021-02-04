@@ -2,9 +2,18 @@
 A simple .NET user name and password generator
 
 Usage:
+
+####Generate a single User
 ```C#
 (...)
     User user = UserGenerator.GenerateUser();
+(...)
+```
+
+####Generate 10 users at once
+```C#
+(...)
+    List<User> userList = UserGenerator.GenerateUsers(10);
 (...)
 ```
 
