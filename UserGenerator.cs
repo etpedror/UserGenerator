@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -110,6 +113,25 @@ namespace UserGenerator
             result.Domain = Domain.Names[GetNewRandom(0, Domain.Names.Count - 1)];
             result.Password = new String(GetUniqueKey(10));
             return result;
+        }
+
+        /// <summary>
+        /// Returns a list of distinct generated users
+        /// </summary>
+        /// <param name="numberOfUsers">The number of users to be generated</param>
+        /// <returns>A list of distinct generated users</returns>
+        public static List<User> GenerateUsers(int numberOfUsers)
+        {
+            var result = new Hashtable();
+            while(result.Count < numberOfUsers)
+            {
+                var newUser = GenerateUser();
+                if(!result.ContainsKey(newUser.Email))
+                {
+                    result.Add(newUser.Email, newUser);
+                }
+            }
+            return result.Values.OfType<User>().ToList();
         }
     }
 }
